@@ -11,7 +11,7 @@ public class Server {
 	public static void main(String args[]) throws Exception 
 	{ 
 		DatagramSocket serverSocket = new DatagramSocket(9876); 
-		byte[] receiveData = new byte[1024]; 
+		 
 		AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 		DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, format);
         speakers = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
@@ -19,6 +19,7 @@ public class Server {
         speakers.start();
 		while(true) 
 		{ 
+			byte[] receiveData = new byte[1024];
 			DatagramPacket receivedPacket = new DatagramPacket(receiveData, receiveData.length); 
 			serverSocket.receive(receivedPacket); 
 			byte[] AudioReceived = receivedPacket.getData(); 
