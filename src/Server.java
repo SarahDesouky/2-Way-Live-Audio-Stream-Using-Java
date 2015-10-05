@@ -19,7 +19,7 @@ public class Server {
         speakers.start();
 		while(true) 
 		{ 
-			byte[] receiveData = new byte[1024];
+			byte[] receiveData = new byte[4096];
 			DatagramPacket receivedPacket = new DatagramPacket(receiveData, receiveData.length); 
 			serverSocket.receive(receivedPacket); 
 			byte[] AudioReceived = receivedPacket.getData(); 
