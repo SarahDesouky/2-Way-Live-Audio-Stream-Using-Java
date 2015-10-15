@@ -20,7 +20,7 @@ public class Client {
 		microphone.start();
 
 		while(true) {
-			byte[] audioData = new byte[microphone.getBufferSize()];
+			byte[] audioData = new byte[4096];
 			microphone.read(audioData, 0, 4096); 
 			DatagramPacket packetToSend = new DatagramPacket(audioData, audioData.length, IPAddress, 9876); 
 			clientSocket.send(packetToSend);
