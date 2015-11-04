@@ -6,7 +6,10 @@ import javax.sound.sampled.SourceDataLine;
 
 public class Server {
 	
+	
 	static SourceDataLine speakers;
+	static InetAddress Ip;
+
 	
 	public static void main(String args[]) throws Exception 
 	{ 
@@ -17,6 +20,10 @@ public class Server {
         speakers = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
         speakers.open(format);
         speakers.start();
+        byte[] receive = new byte[1024];
+        DatagramPacket received = new DatagramPacket(receive, receive.length);
+        Ip = received.getAddress();
+        new ServerThread().start();
 		while(true) 
 		{ 
 			byte[] receiveData = new byte[4096];

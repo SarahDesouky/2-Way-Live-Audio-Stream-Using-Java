@@ -7,6 +7,8 @@ public class Client {
 
 	static DatagramSocket clientSocket;
 	static TargetDataLine microphone;
+	
+
 
 
 	public static void main(String args[]) throws Exception 
@@ -18,7 +20,10 @@ public class Client {
 		microphone = (TargetDataLine) AudioSystem.getLine(info);
 		microphone.open(format);
 		microphone.start();
-
+		byte[] start = new byte[1024];
+		clientSocket.send(new DatagramPacket(start, start.length, IPAddress, 9876));
+		new ClientThread().start();
+		
 		while(true) {
 			byte[] audioData = new byte[4096];
 			microphone.read(audioData, 0, 4096); 
