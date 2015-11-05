@@ -3,27 +3,26 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
 import javax.sound.sampled.TargetDataLine; 
+
 public class Client {
 
 	static DatagramSocket clientSocket;
 	static TargetDataLine microphone;
-	
-
-
 
 	public static void main(String args[]) throws Exception 
 	{ 
 		clientSocket = new DatagramSocket(); 
-		InetAddress IPAddress = InetAddress.getByName("localhost"); 
+		byte[] address = {(byte) 192,(byte)168,(byte)43,(byte)88};
+		InetAddress IPAddress = InetAddress.getByAddress(address);
+		//InetAddress IPAddress = 192.168.43.25;
 		AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 		DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 		microphone = (TargetDataLine) AudioSystem.getLine(info);
 		microphone.open(format);
 		microphone.start();
-		byte[] start = new byte[1024];
-		clientSocket.send(new DatagramPacket(start, start.length, IPAddress, 9876));
+//		byte[] start = new byte[1024];
+//		clientSocket.send(new DatagramPacket(start, start.length, IPAddress, 9876));
 		new ClientThread().start();
-		
 		while(true) {
 			byte[] audioData = new byte[4096];
 			microphone.read(audioData, 0, 4096); 

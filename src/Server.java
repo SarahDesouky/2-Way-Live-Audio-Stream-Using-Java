@@ -18,11 +18,13 @@ public class Server {
 		AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 		DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, format);
         speakers = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
+        
+        
         speakers.open(format);
         speakers.start();
-        byte[] receive = new byte[1024];
-        DatagramPacket received = new DatagramPacket(receive, receive.length);
-        Ip = received.getAddress();
+        //byte[] receive = new byte[1024];
+        //DatagramPacket received = new DatagramPacket(receive, receive.length);
+        //Ip = received.getAddress();
         new ServerThread().start();
 		while(true) 
 		{ 

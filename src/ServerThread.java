@@ -1,7 +1,6 @@
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.DataLine;
@@ -19,7 +18,8 @@ public class ServerThread extends Thread {
 	public void run(){
 		try {
 			clientSocket = new DatagramSocket(); 
-			InetAddress IPAddress = Server.Ip; 
+			byte [] address = {(byte)192, (byte)168, (byte)43, (byte)25};
+			InetAddress IPAddress = InetAddress.getByAddress(address);
 			AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 			DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 			microphone = (TargetDataLine) AudioSystem.getLine(info);
