@@ -28,7 +28,7 @@ public class ClientThread extends Thread {
 			speakers.start();
 			while(true) 
 			{ 
-				byte[] receiveData = new byte[4096];
+				byte[] receiveData = new byte[2048];
 				DatagramPacket receivedPacket = new DatagramPacket(receiveData, receiveData.length); 
 				serverSocket.receive(receivedPacket); 
 				byte[] AudioReceived = receivedPacket.getData(); 

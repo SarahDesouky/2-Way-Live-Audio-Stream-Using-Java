@@ -30,8 +30,8 @@ public class Client {
 		microphone.start();
 		new ClientThread().start();
 		while(true) {
-			byte[] audioData = new byte[4096];
-			microphone.read(audioData, 0, 4096); 
+			byte[] audioData = new byte[2048];
+			microphone.read(audioData, 0, 2048); 
 			DatagramPacket packetToSend = new DatagramPacket(audioData, audioData.length, IPAddress, 9876); 
 			clientSocket.send(packetToSend);
 		}
