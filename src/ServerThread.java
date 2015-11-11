@@ -18,8 +18,10 @@ public class ServerThread extends Thread {
 	public void run(){
 		try {
 			clientSocket = new DatagramSocket(); 
-			byte [] address = {(byte)192, (byte)168, (byte)43, (byte)25};
-			InetAddress IPAddress = InetAddress.getByAddress(address);
+			//byte [] address = {(byte)192, (byte)168, (byte)1, (byte)10};
+			//InetAddress IPAddress = InetAddress.getByAddress(address);
+			InetAddress IPAddress = Server.Ip;
+			System.out.println(Server.Ip);
 			AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
 			DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 			microphone = (TargetDataLine) AudioSystem.getLine(info);
