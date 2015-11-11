@@ -28,12 +28,10 @@ public class Client {
 		microphone = (TargetDataLine) AudioSystem.getLine(info);
 		microphone.open(format);
 		new ClientThread().start();
-		while(true) {
-			microphone.start();
+		microphone.start();
+		while(true) {			
 			byte[] audioData = new byte[2048];
 			microphone.read(audioData, 0, 2048);
-			microphone.drain();
-			microphone.stop();
 			DatagramPacket packetToSend = new DatagramPacket(audioData, audioData.length, IPAddress, 9876); 
 			clientSocket.send(packetToSend);
 		}
