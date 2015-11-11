@@ -23,7 +23,7 @@ public class Server {
         speakers.start();
 		while(true) 
 		{ 
-			byte[] receiveData = new byte[512];
+			byte[] receiveData = new byte[4096];
 			DatagramPacket receivedPacket = new DatagramPacket(receiveData, receiveData.length); 
 			serverSocket.receive(receivedPacket); 
 			Ip = receivedPacket.getAddress();

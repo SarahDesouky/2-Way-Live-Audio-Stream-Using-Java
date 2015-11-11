@@ -25,10 +25,12 @@ public class ServerThread extends Thread {
 			microphone = (TargetDataLine) AudioSystem.getLine(info);
 			microphone.open(format);
 			microphone.start();
-
 			while(true) {
-				byte[] audioData = new byte[512];
-				microphone.read(audioData, 0, 512); 
+				//microphone.start();
+				byte[] audioData = new byte[4096];
+				microphone.read(audioData, 0, 4096); 
+				//microphone.drain();
+				//microphone.stop();
 				DatagramPacket packetToSend = new DatagramPacket(audioData, audioData.length, IPAddress, 9877); 
 				clientSocket.send(packetToSend);
 			}
