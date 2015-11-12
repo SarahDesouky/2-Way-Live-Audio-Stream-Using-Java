@@ -21,14 +21,14 @@ public class ClientThread extends Thread {
 		try {
 			DatagramSocket serverSocket = new DatagramSocket(9877); 
 
-			AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
+			AudioFormat format = new AudioFormat(44100.0f, 16, 1, true, true);
 			DataLine.Info dataLineInfo = new DataLine.Info(SourceDataLine.class, format);
 			speakers = (SourceDataLine) AudioSystem.getLine(dataLineInfo);
 			speakers.open(format);
 			speakers.start();
 			while(true) 
 			{ 
-				byte[] receiveData = new byte[2048];
+				byte[] receiveData = new byte[4096];
 				DatagramPacket receivedPacket = new DatagramPacket(receiveData, receiveData.length); 
 				serverSocket.receive(receivedPacket); 
 				byte[] AudioReceived = receivedPacket.getData(); 

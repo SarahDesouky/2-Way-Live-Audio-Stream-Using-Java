@@ -23,15 +23,15 @@ public class Client {
 			address[i] = (byte)Integer.parseInt(ip[i]);
 		}
 		InetAddress IPAddress = InetAddress.getByAddress(address);
-		AudioFormat format = new AudioFormat(8000.0f, 16, 1, true, true);
+		AudioFormat format = new AudioFormat(44100.0f, 16, 1, true, true);
 		DataLine.Info info = new DataLine.Info(TargetDataLine.class, format);
 		microphone = (TargetDataLine) AudioSystem.getLine(info);
 		microphone.open(format);
 		new ClientThread().start();
 		microphone.start();
 		while(true) {			
-			byte[] audioData = new byte[2048];
-			microphone.read(audioData, 0, 2048);
+			byte[] audioData = new byte[4096];
+			microphone.read(audioData, 0, 4096);
 			DatagramPacket packetToSend = new DatagramPacket(audioData, audioData.length, IPAddress, 9876); 
 			clientSocket.send(packetToSend);
 		}
